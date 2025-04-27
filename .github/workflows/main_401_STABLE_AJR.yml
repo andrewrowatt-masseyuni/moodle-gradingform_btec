@@ -6,35 +6,22 @@ jobs:
     runs-on: 'ubuntu-latest'
     services:
       postgres:
-        image: postgres:13
+        image: postgres:16
         env:
           POSTGRES_USER: 'postgres'
           POSTGRES_HOST_AUTH_METHOD: 'trust'
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
-      mariadb:
-        image: mariadb:10
-        env:
-          MYSQL_USER: 'root'
-          MYSQL_ALLOW_EMPTY_PASSWORD: "true"
-          MYSQL_CHARACTER_SET_SERVER: "utf8mb4"
-          MYSQL_COLLATION_SERVER: "utf8mb4_unicode_ci"
-
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
 
     strategy:
       fail-fast: false
       matrix:
         include:
-          - php: '8.3'
+          - php: '8.1'
             moodle-branch: 'MOODLE_401_STABLE'
-            database: 'mariadb'
-          # - php: '8.1'
-          #   moodle-branch: 'master'
-          #   database: 'pgsql'
+            database: 'pgsql'
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
