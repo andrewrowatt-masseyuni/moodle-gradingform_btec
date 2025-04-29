@@ -73,7 +73,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             }
         }
 
-        // Add additional css classes when the form is not in edit mode.
+        // Add additional css classes when the form is not in edit mode.   xxxx
         $criteriontemplatetrclass = 'criterion' . $criterion['class'];
 
         if ($mode != gradingform_btec_controller::DISPLAY_EDIT_FULL) {
